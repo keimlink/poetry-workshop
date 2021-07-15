@@ -120,6 +120,8 @@ git add .
 git commit
 ```
 
+See [`pyproject.toml` file documentation](https://python-poetry.org/docs/pyproject/) for all options.
+
 ```console
 poetry help init
 
