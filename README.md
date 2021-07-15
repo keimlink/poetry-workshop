@@ -95,16 +95,17 @@ For installing a specific version, Windows installation instructions and alterna
 ## Creating a New Project with Poetry
 
 ```console
-poetry new poetry-demo
+poetry new --src poetry-demo
 poetry help new
 ```
 
 ```console
 poetry-demo
-├── poetry_demo
-│  └── __init__.py
 ├── pyproject.toml
 ├── README.rst
+├── src
+│  └── poetry_demo
+│     └── __init__.py
 └── tests
    ├── __init__.py
    └── test_poetry_demo.py
