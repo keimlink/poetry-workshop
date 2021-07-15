@@ -73,3 +73,117 @@ No support for declaring project dependencies and entry points, so direct usage 
 ### Poetry
 
 [Poetry](https://python-poetry.org/), first released in 2018, is a command-line tool to handle dependency installation and isolation as well as building and packaging of Python packages. It provides its own dependency resolver.
+
+## Installing Poetry
+
+Poetry requires Python 2.7 or 3.5+, although Poetry 1.2 will only support Python 3.6+. It is multi-platform and the goal is to make it work equally well on Windows, Linux and OSX.
+
+```console
+python --version
+```
+
+```console
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+```
+
+```console
+poetry --version
+```
+
+For installing a specific version, Windows installation instructions and alternative installation methods see [Poetry Introduction](https://python-poetry.org/docs/).
+
+## Creating a New Project with Poetry
+
+```console
+poetry new poetry-demo
+poetry help new
+```
+
+```console
+poetry-demo
+├── poetry_demo
+│  └── __init__.py
+├── pyproject.toml
+├── README.rst
+└── tests
+   ├── __init__.py
+   └── test_poetry_demo.py
+```
+
+```console
+cd poetry-demo
+cat pyproject.toml
+git init
+echo "__pycache__" > .gitignore
+git add .
+git commit
+```
+
+```console
+poetry help init
+
+```
+
+## Using the Virtual Environment
+
+```console
+poetry install
+poetry help install
+poetry env info
+poetry help env
+poetry run python -m pytest
+poetry help run
+```
+
+```console
+poetry shell
+which python
+python -m pytest
+exit
+poetry help shell
+```
+
+## Installing the First Dependency
+
+```console
+poetry add pendulum
+git diff
+git status
+git add poetry.lock pyproject.toml
+git commit
+poetry help add
+```
+
+Discuss [Dependency specification](https://python-poetry.org/docs/dependency-specification/) in Poetry.
+
+Check [pendulum version on PyPI](https://pypi.org/project/pendulum/).
+
+```console
+poetry add pendulum@2.1.2
+git diff
+git add poetry.lock pyproject.toml
+git commit
+```
+
+## Updating Dependencies
+
+```console
+poetry show
+poetry show pytest
+poetry help show
+```
+
+```console
+poetry update --dry-run pytest
+poetry help update
+```
+
+Check [pytest version on PyPI](https://pypi.org/project/pytest/).
+
+```console
+poetry add pytest@6.2.4
+poetry run python -m pytest
+git diff
+git add poetry.lock pyproject.toml
+git commit
+```
