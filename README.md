@@ -190,3 +190,94 @@ git diff
 git add poetry.lock pyproject.toml
 git commit
 ```
+
+## Adding a Feature
+
+```diff
+diff --git a/poetry_demo/__init__.py b/poetry_demo/__init__.py
+index b794fd4..8cf17cf 100644
+--- a/src/poetry_demo/__init__.py
++++ b/src/poetry_demo/__init__.py
+@@ -1 +1,13 @@
+ __version__ = '0.1.0'
++
++import pendulum
++
++
++def main():
++    now = pendulum.now("Europe/Paris")
++    print(now)
++    print(now.in_timezone("America/Toronto"))
++
++
++if "__name__" == "__main__":
++    main()
+diff --git a/pyproject.toml b/pyproject.toml
+index e502597..93f08be 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -11,6 +11,9 @@ pendulum = "2.1.2"
+ [tool.poetry.dev-dependencies]
+ pytest = "6.2.4"
+ 
++[tool.poetry.scripts]
++poetry-demo = "poetry_demo:main"
++
+ [build-system]
+ requires = ["poetry-core>=1.0.0"]
+ build-backend = "poetry.core.masonry.api"
+```
+
+```console
+poetry run poetry-demo
+git diff
+git add src/poetry_demo/__init__.py pyproject.toml
+git commit
+```
+
+## Exporting the Lock File in Requirements Format
+
+```console
+poetry export
+poetry export --dev
+poetry export --output requirements.txt
+rm requirements.txt
+poetry help export
+```
+
+## Building Source and Wheels Archives
+
+```console
+poetry build
+ls -al dist
+rm -fr dist
+poetry build --format wheel
+ls -al dist
+poetry help build
+poetry help publish
+```
+
+## Inspecting the Wheel
+
+```console
+cd dist
+unzip poetry_demo-0.1.0-py3-none-any.whl
+cat poetry_demo/__init__.py
+cat poetry_demo-0.1.0.dist-info/METADATA
+cat poetry_demo-0.1.0.dist-info/entry_points.txt
+rm -fr poetry_demo poetry_demo-0.1.0.dist-info
+cd -
+```
+
+## Installing the Project with All Dependencies Pinned
+
+```console
+poetry export --output requirements.txt
+echo "poetry_demo==$(poetry version --short) \\" >> requirements.txt
+poetry run python -m pip hash dist/poetry_demo-0.1.0-py3-none-any.whl | awk 'NR==2' >> requirements.txt
+cat requirements.txt
+python -m venv .venv
+.venv/bin/python -m pip install --find-links dist --requirement requirements.txt
+.venv/bin/python -m pip freeze
+.venv/bin/poetry-demo
+```
