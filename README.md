@@ -138,6 +138,8 @@ poetry run python -m pytest
 poetry help run
 ```
 
+The virtual environment will either be created in a global cache directory or inside the project’s root directory, depending on the value of the [`virtualenvs.in-project` setting](https://python-poetry.org/docs/configuration/#virtualenvsin-project). It's also possible to configure Poetry to not create the virtual environment at all using the [`virtualenvs.create` setting](https://python-poetry.org/docs/configuration/#virtualenvscreate).
+
 ```console
 poetry shell
 which python
