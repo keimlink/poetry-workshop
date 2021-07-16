@@ -186,7 +186,7 @@ poetry help update
 Check [pytest version on PyPI](https://pypi.org/project/pytest/).
 
 ```console
-poetry add pytest@6.2.4
+poetry add --dev pytest@6.2.4
 poetry run python -m pytest
 git diff
 git add poetry.lock pyproject.toml
