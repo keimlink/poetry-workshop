@@ -250,6 +250,7 @@ exit
 poetry export
 poetry export --dev
 poetry export --output requirements.txt
+cat requirements.txt
 rm requirements.txt
 poetry help export
 ```
