@@ -293,6 +293,10 @@ echo "poetry_demo==$(poetry version --short) \\" >> requirements.txt
 poetry run python -m pip hash dist/poetry_demo-0.1.0-py3-none-any.whl
 poetry run python -m pip hash dist/poetry_demo-0.1.0-py3-none-any.whl | awk 'NR==2' >> requirements.txt
 cat requirements.txt
+git diff
+git status
+git add requirements.txt
+git commit
 python -m venv .venv
 .venv/bin/python -m pip install --find-links dist --requirement requirements.txt
 .venv/bin/python -m pip freeze
