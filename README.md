@@ -263,6 +263,11 @@ ls -al dist
 rm -fr dist
 poetry build --format wheel
 ls -al dist
+echo "dist/" >> .gitignore
+git diff
+git status
+git add .gitignore
+git commit
 poetry help build
 poetry help publish
 ```
