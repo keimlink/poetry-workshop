@@ -237,6 +237,13 @@ git add src/poetry_demo/__init__.py pyproject.toml
 git commit
 ```
 
+```console
+poetry install
+poetry shell
+poetry-demo
+exit
+```
+
 ## Exporting the Lock File in Requirements Format
 
 ```console
