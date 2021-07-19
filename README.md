@@ -288,7 +288,9 @@ cd -
 
 ```console
 poetry export --output requirements.txt
+echo "poetry_demo==$(poetry version --short) \\"
 echo "poetry_demo==$(poetry version --short) \\" >> requirements.txt
+poetry run python -m pip hash dist/poetry_demo-0.1.0-py3-none-any.whl
 poetry run python -m pip hash dist/poetry_demo-0.1.0-py3-none-any.whl | awk 'NR==2' >> requirements.txt
 cat requirements.txt
 python -m venv .venv
