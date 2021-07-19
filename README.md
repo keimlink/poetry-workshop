@@ -297,8 +297,29 @@ git diff
 git status
 git add requirements.txt
 git commit
+```
+
+Start a new terminal and fire up a HTTP server serving the wheel:
+
+```console
+cd poetry-demo/dist
+python -m http.server 8000 --bind 127.0.0.1
+```
+
+Now simulate a deployment:
+
+```console
+mkdir /tmp/deploy
+cp requirements.txt /tmp/deploy
+cd /tmp/deploy
+ls -al
 python -m venv .venv
-.venv/bin/python -m pip install --find-links dist --requirement requirements.txt
+.venv/bin/python -m pip install --find-links http://127.0.0.1:8000 --requirement requirements.txt
 .venv/bin/python -m pip freeze
 .venv/bin/poetry-demo
+.venv/bin/python -c "from poetry_demo import main; main()"
+cd -
+rm -fr /tmp/deploy
 ```
+
+Don't forget to stop the HTTP server in the other terminal! :wink:
