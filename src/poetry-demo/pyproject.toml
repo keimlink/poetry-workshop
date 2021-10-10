@@ -11,6 +11,9 @@ pendulum = "2.1.2"
 [tool.poetry.dev-dependencies]
 pytest = "6.2.4"
 
+[tool.poetry.scripts]
+poetry-demo = "poetry_demo:main"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
