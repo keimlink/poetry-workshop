@@ -122,26 +122,8 @@ git commit -m "Pin pytest to 6.2.4"
 ## Adding a Feature
 
 ```diff
-diff --git a/poetry_demo/__init__.py b/poetry_demo/__init__.py
-index b794fd4..8cf17cf 100644
---- a/src/poetry_demo/__init__.py
-+++ b/src/poetry_demo/__init__.py
-@@ -1 +1,13 @@
- __version__ = '0.1.0'
-+
-+import pendulum
-+
-+
-+def main():
-+    now = pendulum.now("Europe/Paris")
-+    print(now)
-+    print(now.in_timezone("America/Toronto"))
-+
-+
-+if "__name__" == "__main__":
-+    main()
 diff --git a/pyproject.toml b/pyproject.toml
-index e502597..93f08be 100644
+index 65606f0..d0176c0 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
 @@ -11,6 +11,9 @@ pendulum = "2.1.2"
@@ -154,10 +136,42 @@ index e502597..93f08be 100644
  [build-system]
  requires = ["poetry-core>=1.0.0"]
  build-backend = "poetry.core.masonry.api"
+diff --git a/src/poetry_demo/__init__.py b/src/poetry_demo/__init__.py
+index b794fd4..74e914f 100644
+--- a/src/poetry_demo/__init__.py
++++ b/src/poetry_demo/__init__.py
+@@ -1 +1,24 @@
+ __version__ = '0.1.0'
++
++import argparse
++
++import pendulum
++
++
++def parse():
++    parser = argparse.ArgumentParser(description="Print current date and time for a timezone")
++    parser.add_argument("-tz" ,"--timezone", default="UTC")
++    return parser.parse_args()
++
++
++def now(timezone):
++    return pendulum.now(timezone)
++
++
++def main():
++    args = parse()
++    print(now(args.timezone))
++
++
++if "__name__" == "__main__":
++    main()
 ```
 
 ```console
+poetry run poetry-demo -h
 poetry run poetry-demo
+poetry run poetry-demo -tz Asia/Ulaanbaatar
+poetry run poetry-demo -tz not/found
 git diff
 git add src/poetry_demo/__init__.py pyproject.toml
 git commit -m "Add command to print current date and time for a timezone"
