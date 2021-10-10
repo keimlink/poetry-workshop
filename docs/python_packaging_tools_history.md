@@ -71,3 +71,5 @@ No support for declaring project dependencies and entry points, so direct usage 
 ## Poetry
 
 [Poetry](https://python-poetry.org/), first released in 2018, is a command-line tool to handle dependency installation and isolation as well as building and packaging of Python packages. It provides its own dependency resolver.
+
+Next: [Poetry Basics](poetry_basics.md)
