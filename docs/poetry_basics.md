@@ -43,7 +43,7 @@ cat pyproject.toml
 git init
 echo "__pycache__" > .gitignore
 git add .
-git commit
+git commit -m "Initial commit"
 ```
 
 See [`pyproject.toml` file documentation](https://python-poetry.org/docs/pyproject/) for all options.
@@ -81,7 +81,7 @@ poetry add pendulum
 git diff
 git status
 git add poetry.lock pyproject.toml
-git commit
+git commit -m "Add pendulum package"
 poetry help add
 ```
 
@@ -93,7 +93,7 @@ Check [pendulum version on PyPI](https://pypi.org/project/pendulum/).
 poetry add pendulum@2.1.2
 git diff
 git add poetry.lock pyproject.toml
-git commit
+git commit -m "Pin pendulum to 2.1.2"
 ```
 
 ## Updating Dependencies
@@ -116,7 +116,7 @@ poetry add --dev pytest@6.2.4
 poetry run python -m pytest
 git diff
 git add poetry.lock pyproject.toml
-git commit
+git commit -m "Pin pytest to 6.2.4"
 ```
 
 ## Adding a Feature
@@ -160,7 +160,7 @@ index e502597..93f08be 100644
 poetry run poetry-demo
 git diff
 git add src/poetry_demo/__init__.py pyproject.toml
-git commit
+git commit -m "Add command to print current date and time for a timezone"
 ```
 
 ```console
@@ -193,7 +193,7 @@ echo "dist/" >> .gitignore
 git diff
 git status
 git add .gitignore
-git commit
+git commit -m "Add dist directory to .gitignore"
 poetry help build
 poetry help publish
 ```
@@ -222,7 +222,7 @@ cat requirements.txt
 git diff
 git status
 git add requirements.txt
-git commit
+git commit -m "Add requirements.txt to install project"
 ```
 
 Start a new terminal and fire up a HTTP server serving the wheel:
