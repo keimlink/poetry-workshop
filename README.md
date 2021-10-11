@@ -4,6 +4,7 @@ A workshop to learn working with [Poetry], the Python packaging and dependency m
 
 1. [A Brief History of Python Packaging Tools](docs/python_packaging_tools_history.md)
 1. [Poetry Basics](docs/poetry_basics.md)
+1. [Using Poetry with Docker](docs/poetry_docker.md)
 
 ## License
 
