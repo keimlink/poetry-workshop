@@ -95,10 +95,10 @@ docker run -it --rm -v "$(pwd):/usr/local/src/poetry-demo" poetry-demo-develop \
 ## Extending the `Dockerfile` for Production
 
 ```Dockerfile
-diff --git a/src/poetry-demo/Dockerfile b/src/poetry-demo/Dockerfile
+diff --git a/Dockerfile b/Dockerfile
 index 6043828..90ed580 100644
---- a/src/poetry-demo/Dockerfile
-+++ b/src/poetry-demo/Dockerfile
+--- a/Dockerfile
++++ b/Dockerfile
 @@ -33,3 +33,36 @@ ENV PYTHONUNBUFFERED=True
  VOLUME /usr/local/src/poetry-demo
  
