@@ -17,3 +17,19 @@ SHELL ["bash", "--login", "-c"]
 ENTRYPOINT ["bash", "--login", "-c"]
 
 CMD ["poetry"]
+
+FROM python-poetry AS develop
+
+WORKDIR /usr/local/src/poetry-demo
+
+COPY poetry.lock pyproject.toml ./
+
+COPY src src
+
+RUN poetry install
+
+ENV PYTHONUNBUFFERED=True
+
+VOLUME /usr/local/src/poetry-demo
+
+CMD ["poetry run poetry-demo"]
