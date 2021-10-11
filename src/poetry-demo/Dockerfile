@@ -33,3 +33,36 @@ ENV PYTHONUNBUFFERED=True
 VOLUME /usr/local/src/poetry-demo
 
 CMD ["poetry run poetry-demo"]
+
+FROM develop AS build
+
+RUN poetry build --format wheel \
+    && poetry export --output requirements.txt \
+    && echo "poetry_demo==$(poetry version --short) \\" >> requirements.txt \
+    && poetry run python -m pip hash dist/poetry_demo*.whl | awk 'NR==2' >> requirements.txt
+
+FROM python:3.9.7@sha256:09e73c4e10e0558ddbcbf4d1d758d041a4d484585768af1e6f1d3601a3488649
+
+ARG GID=1000
+ARG UID=1000
+
+ENV PIP_DISABLE_PIP_VERSION_CHECK=True
+ENV PIP_NO_CACHE_DIR=False
+ENV PYTHONUNBUFFERED=True
+
+WORKDIR /usr/local/src
+
+COPY --from=build /usr/local/src/poetry-demo/dist/poetry_demo*.whl ./
+COPY --from=build /usr/local/src/poetry-demo/requirements.txt ./
+
+RUN python -m venv poetry-demo \
+    && poetry-demo/bin/python -m pip install --find-links . --requirement requirements.txt \
+    && rm -v poetry_demo*.whl \
+    && ln --symbolic --target-directory=/usr/local/bin /usr/local/src/poetry-demo/bin/poetry-demo
+
+RUN groupadd --gid $GID poetry-demo \
+    && useradd --gid $GID --no-log-init -M --uid $UID poetry-demo
+
+USER $UID
+
+ENTRYPOINT ["poetry-demo"]
