@@ -6,7 +6,7 @@ For a complete list of the most relevant projects in the space of Python install
 
 [distutils](https://docs.python.org/3/library/distutils.html#module-distutils) is the original Python packaging system, added to the standard library in Python 2.0 which has been released in 2001.
 
-No support for declaring project dependencies and entry points, so direct usage of distutils is now actively discouraged.
+No support for declaring project dependencies and entry points. In Python 3.10 and 3.11 usage of distutils is deprecated, it will be removed in 3.12 (see [PEP 632](https://www.python.org/dev/peps/pep-0632/)).
 
 ## setuptools
 
